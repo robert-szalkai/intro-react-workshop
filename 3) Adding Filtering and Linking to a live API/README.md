@@ -52,7 +52,7 @@ useEffect is a lifecycle function and is invoked immediately after a component i
 In our ContactList component, let's add the lifecycle function
 
 ```javascript
-useEffect(() {
+useEffect(() => {
     getContacts()
         .then(data => {
             // we should be recieving the array of data here
