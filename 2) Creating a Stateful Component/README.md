@@ -6,19 +6,13 @@ Create a new folder "ContactList" in our component directory and the css and ass
 In the ContactList.js file add the following structure:
 
 ```javascript
-import React, { Component } from 'react';
+import React from 'react';
 import './ContactList.css';
 
-class ContactList extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return <div>
-            LIST COMPONENT
-        </div>
-    }
+const ContactList = () => {
+  return (
+    <div>ContactList</div>
+  )
 }
 
 export default ContactList;
@@ -52,13 +46,11 @@ State is used to save data that changes, so when that data changes something on 
 I'm going to say that the data changes and the query changes so let's add state into the mix
 
 ### Adding an initial state
-In our ContactList class add a new object called state with query and contacts as parameters as follows: 
+In our ContactList component add two 2 useState hooks called query and contacts as follows: 
 
 ```javascript
-    state = {
-        query: "",
-        contacts: data
-    }
+    const [query, setQuery] = useState("")
+    const [contacts, setContacts] = useState(data)
 ```
 
 We modify the state using the setState method which will trigger a new rendering cycle (for display components if props change, that also triggers a new cycle)
@@ -76,7 +68,7 @@ We can set our query from the state into the filterText prop (the text we are se
 Let's create a handleSearch function that takes a string parameter and sets the new state
 
 ```javascript
-handleSearch = (searchTerm) => {
+const handleSearch = (searchTerm) => {
     // here we need to set the state with our new searchTerm
 }
 ```
@@ -90,7 +82,7 @@ It now works because we are keeping the *state* of the query in the ContactList 
 We need to parse the given list and render a contact card for each element of the list. We need to create a function that takes as input the contacts list and returns a list of JSX elements.
 
 ```javascript
-renderContacts = (contacts) => {
+const renderContacts = (contacts) => {
     // map all contacts to a JSX element something like this:
     // contacts.map(contact => <ContactCard *props go here* />)
 }
@@ -99,7 +91,7 @@ renderContacts = (contacts) => {
 And now we can test out our function the render function like this:
 
 ```javascript
-{this.renderContacts(this.state.contacts)}
+{renderContacts(contacts)}
 ```
 
 ## Recap

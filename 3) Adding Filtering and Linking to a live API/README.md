@@ -3,10 +3,8 @@
 Let's remove our rawData mock from our list and link it to an API. This breaks the app because we no longer have the data variable. Let's fix it by changing our state to 
 
 ```javascript
-    state = {
-        query: "",
-        contacts: [],
-    }
+    const [query, setQuery] = useState("")
+    const [contacts, setContacts] = useState([])
 ```
 
 Now we will start from an empty array and populate it with what comes from our server.
@@ -47,20 +45,20 @@ Be sure to test the function before moving forward.
 
 ## Populating with data from API
 
-### componentDidMount()
+### useEffect()
 
-componentDidMount is a lifecycle function and is invoked immediately after a component is mounted which is the ideal place to make API calls.
+useEffect is a lifecycle function and is invoked immediately after a component is mounted which is the ideal place to make API calls.
 
-In our ContactList class, let's add the lifecycle function
+In our ContactList component, let's add the lifecycle function
 
 ```javascript
-componentDidMount() {
+useEffect(() {
     getContacts()
         .then(data => {
             // we should be recieving the array of data here
             // we should update the state with our new data
         })
-}
+}, [])
 ```
 
 ## Filtering the data
@@ -70,7 +68,7 @@ It should accept a new property onSubmit which is a function passed down from th
 
 Next we need to handle just the Enter key using a new handleEnter function like so:
 ```javascript
-onKeyPress={event => handleEnter(event, onSubmit)}
+onKeyDown={event => handleEnter(event, onSubmit)}
 ```
 Our method takes in the event. checks if enter is pressed and calls a callback.
 
